@@ -9,7 +9,7 @@
 
 const path = require("path");
 
-const BASE_PATH = path.join(__dirname, "src", "js");
+const BASE_PATH = path.join(__dirname, "es", "js");
 const RUNTIME_PATH = path.join(BASE_PATH, "runtimes");
 const WORKER_PATH = path.join(BASE_PATH, "workers");
 

@@ -3,7 +3,7 @@
     "version": "0.2.7",
     "description": "Perspective.js",
     "main": "build/perspective.node.js",
-    "browser": "src/js/perspective.parallel.js",
+    "browser": "es/js/perspective.parallel.js",
     "publishConfig": {
         "access": "public"
     },
@@ -27,8 +27,8 @@
         "precompile": "mkdir -p obj && mkdir -p ../../obj/",
         "compile": "cd ../../obj/ && emcmake cmake ../scripts/ && emmake make -j${PSP_CPU_COUNT-8}",
         "postcompile": "node ../../scripts/compile",
-        "build": "npm-run-all build:webpack",
-        "build:webpack": "npm-run-all -p build:webpack:*",
+        "build": "npm-run-all -p build:**",
+        "build:es": "babel src/js --out-dir es/js",
         "build:webpack:umd": "webpack --color --config src/config/perspective.config.js",
         "build:webpack:node": "webpack --color --config src/config/perspective.node.config.js",
         "docs": "documentation build src/js/perspective.js -f md --shallow > README.md && cp README.md ../../docs/perspective.md",
@@ -58,11 +58,16 @@
     "author": "",
     "license": "Apache-2.0",
     "dependencies": {
+        "@babel/runtime": "^7.1.0",
         "bufferutil": "~3.0.0",
         "d3-array": "^1.2.1",
         "moment": "^2.19.1",
         "papaparse": "^4.3.6",
         "underscore": "^1.8.3",
         "utf-8-validate": "~4.0.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.1.5",
+        "@babel/core": "^7.1.6"
     }
 }
