@@ -7,7 +7,7 @@
  *
  */
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const PerspectivePlugin = require("@jpmorganchase/perspective/webpack-plugin");
 const path = require("path");
 
@@ -20,9 +20,6 @@ module.exports = {
         libraryExport: "default",
         path: path.resolve(__dirname, "./build")
     },
-    plugins: [
-        new PerspectivePlugin(),
-        new HtmlWebpackPlugin()
-    ],
+    plugins: [new PerspectivePlugin(), new HtmlWebpackPlugin()],
     devtool: "source-map"
 };

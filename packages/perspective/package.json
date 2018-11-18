@@ -10,8 +10,9 @@
     "files": [
         "build/*",
         "index.d.ts",
-        "obj/*",
         "es/**/*",
+        "obj/*",
+        "loader/*",
         "webpack-plugin.js"
     ],
     "typings": "index.d.ts",
