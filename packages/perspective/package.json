@@ -11,9 +11,8 @@
         "build/*",
         "index.d.ts",
         "obj/*",
-        "src/**/*",
-        "webpack-plugin.js",
-        "babel.config.js"
+        "es/**/*",
+        "webpack-plugin.js"
     ],
     "typings": "index.d.ts",
     "scripts": {
@@ -67,7 +66,7 @@
         "utf-8-validate": "~4.0.0"
     },
     "devDependencies": {
-        "@babel/cli": "^7.1.5",
-        "@babel/core": "^7.1.6"
+        "@babel/cli": "^7.1.0",
+        "@babel/core": "^7.1.0"
     }
 }

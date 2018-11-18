@@ -13,9 +13,9 @@ const BASE_PATH = path.join(__dirname, "es", "js");
 const RUNTIME_PATH = path.join(BASE_PATH, "runtimes");
 const WORKER_PATH = path.join(BASE_PATH, "workers");
 
-const WORKER_LOADER_PATH = require.resolve("./src/loader/file_worker_loader");
-const WASM_LOADER_PATH = require.resolve("./src/loader/cross_origin_file_loader.js");
-const BLOB_LOADER_PATH = require.resolve("./src/loader/blob_worker_loader.js");
+const WORKER_LOADER_PATH = require.resolve("./loader/file_worker_loader");
+const WASM_LOADER_PATH = require.resolve("./loader/cross_origin_file_loader.js");
+const BLOB_LOADER_PATH = require.resolve("./loader/blob_worker_loader.js");
 
 const DEFAULT_PLUGIN_OPTIONS = {
     build_worker: false
