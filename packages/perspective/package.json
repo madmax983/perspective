@@ -10,6 +10,7 @@
     "files": [
         "build/*",
         "index.d.ts",
+        "obj/*",
         "src/**/*",
         "webpack-plugin.js",
         "babel.config.js"

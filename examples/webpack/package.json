@@ -11,6 +11,10 @@
     "license": "Apache-2.0",
     "dependencies": {
         "@jpmorganchase/perspective": "^0.2.7",
-        "@jpmorganchase/perspective-viewer": "^0.2.7"
+        "@jpmorganchase/perspective-webpack-plugin": "^0.2.7"
+    },
+    "devDependencies": {
+        "html-webpack-plugin": "^3.2.0",
+        "webpack": "^3.5.6"
     }
 }

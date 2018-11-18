@@ -7,47 +7,34 @@
  *
  */
 
+const path = require("path");
+
+const BASE_PATH = path.join(__dirname, "src", "js");
+const RUNTIME_PATH = path.join(BASE_PATH, "runtimes");
+const WORKER_PATH = path.join(BASE_PATH, "workers");
+
 const WORKER_LOADER_PATH = require.resolve("./src/loader/file_worker_loader");
 const WASM_LOADER_PATH = require.resolve("./src/loader/cross_origin_file_loader.js");
 const BLOB_LOADER_PATH = require.resolve("./src/loader/blob_worker_loader.js");
 
-const BABEL_CONFIG = require("./babel.config.js");
+const DEFAULT_PLUGIN_OPTIONS = {
+    build_worker: false
+};
 
 class PerspectiveWebpackPlugin {
-    constructor(options = {}) {
+    constructor(options = DEFAULT_PLUGIN_OPTIONS) {
         this.options = options;
     }
 
     apply(compiler) {
-        const load_path = [__dirname];
-        const rules = [
-            {
-                test: /\.less$/,
-                include: load_path,
-                use: [{loader: "css-loader"}, {loader: "clean-css-loader", options: {level: 2}}, {loader: "less-loader"}]
-            },
-            {
-                test: /\.(html)$/,
-                include: load_path,
-                use: {
-                    loader: "html-loader",
-                    options: {}
-                }
-            },
-            {
-                test: /\.(arrow)$/,
-                include: load_path,
-                use: {
-                    loader: "arraybuffer-loader",
-                    options: {}
-                }
-            }
-        ];
+        const rules = [];
 
         if (this.options.build_worker) {
             rules.push({
-                test: /perspective\.(asmjs|wasm)\.js$/,
-                include: load_path,
+                test: /\.js$/,
+                include: [
+                    WORKER_PATH
+                ],
                 use: [{
                     loader: WORKER_LOADER_PATH,
                     options: {name: "[name].js", compiled: true}
@@ -58,8 +45,10 @@ class PerspectiveWebpackPlugin {
             });
         } else {
             rules.push({
-                test: /perspective\.(wasm|asmjs)\.js$/,
-                include: load_path,
+                test: /\.js$/,
+                include: [
+                    WORKER_PATH
+                ],
                 use: {
                     loader: WORKER_LOADER_PATH,
                     options: {name: "[name].js"}
@@ -69,16 +58,15 @@ class PerspectiveWebpackPlugin {
 
         rules.push({
             test: /\.js$/,
-            include: load_path,
-            exclude: /node_modules[/\\](?!\@jpmorganchase)|psp\.(asmjs|async|sync)\.js|perspective\.(asmjs|wasm)\.worker\.js/,
-            loader: "babel-loader",
-            options: BABEL_CONFIG
-        });
-
-        rules.push({
-            test: /psp\.(sync|async)\.wasm\.js$/,
-            include: load_path,
-            use: {loader: WASM_LOADER_PATH, options: {name: "[name]"}}
+            include: [
+                RUNTIME_PATH
+            ],
+            use: {
+                loader: WASM_LOADER_PATH,
+                options: {
+                    name: "[name]"
+                }
+            }
         });
 
         const compilerOptions = compiler.options;

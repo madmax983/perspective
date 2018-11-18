@@ -11,10 +11,10 @@ import * as defaults from "./defaults.js";
 
 import {worker} from "./api.js";
 
-import asmjs_worker from "./perspective.asmjs.js";
-import wasm_worker from "./perspective.wasm.js";
+import asmjs_worker from "./workers/perspective.asmjs.js";
+import wasm_worker from "./workers/perspective.wasm.js";
 
-import wasm from "./psp.async.wasm.js";
+import wasm from "./runtimes/psp.async.wasm.js";
 
 /******************************************************************************
  *
