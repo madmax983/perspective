@@ -49,7 +49,7 @@ exports.default = function loader(content) {
             inputPath = inputPath
                 .replace("build", "")
                 .replace(/\.js/, ".worker.js")
-                .replace(/(src\/js\/workers)/, "build");
+                .replace(/(es\/js\/workers)/, "build");
         }
         content = fs.readFileSync(inputPath).toString();
     }
