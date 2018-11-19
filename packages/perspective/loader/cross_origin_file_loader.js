@@ -39,6 +39,8 @@ exports.pitch = function pitch(request) {
         regExp: options.regExp
     });
 
+    console.log(url);
+
     var outputPath = url;
     var publicPath = `__webpack_public_path__ + ${JSON.stringify(outputPath)}`;
     this.emitFile(outputPath, content);
