@@ -8,8 +8,8 @@
  */
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const PerspectivePlugin = require("@jpmorganchase/perspective/webpack-plugin");
-const { StatsWriterPlugin } = require("webpack-stats-plugin");
+const PerspectivePlugin = require("@jpmorganchase/perspective-webpack-plugin");
+const {StatsWriterPlugin} = require("webpack-stats-plugin");
 const path = require("path");
 
 module.exports = {
@@ -21,8 +21,12 @@ module.exports = {
         libraryExport: "default",
         path: path.resolve(__dirname, "./build")
     },
-    plugins: [new PerspectivePlugin(), new HtmlWebpackPlugin(), new StatsWriterPlugin({
-        fields: null
-    })],
+    plugins: [
+        new PerspectivePlugin(),
+        new HtmlWebpackPlugin(),
+        new StatsWriterPlugin({
+            fields: null
+        })
+    ],
     devtool: "source-map"
 };
