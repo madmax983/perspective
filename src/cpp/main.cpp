@@ -858,9 +858,17 @@ table_add_computed_column(t_table& table, val computed_defs) {
     }
 }
 
+t_bool
+is_valid_date(val moment, val candidates, val x) {
+    return moment
+        .call<val>("call", val::object(), x, candidates, val(true))
+        .call<val>("isValid")
+        .as<t_bool>();
+}
+
 // data parsing
 t_dtype
-infer_type(val x, val is_valid_date) {
+infer_type(val x, val moment, val candidates) {
     t_str jstype = x.typeOf().as<t_str>();
     t_dtype t = t_dtype::DTYPE_FLOAT64;
 
@@ -888,7 +896,8 @@ infer_type(val x, val is_valid_date) {
         }
     } else if (!val::global("isNaN").call<t_bool>("call", val::object(), val::global("Number").call<val>("call", val::object(), x))) {
         t = t_dtype::DTYPE_FLOAT64;
-    } else if (jstype == "string" && is_valid_date.call<val>("call", val::object(), x).as<t_bool>()) {
+    } else if (jstype == "string" && is_valid_date(moment, candidates, x)) {
+        // is_valid_date.call<val>("call", val::object(), x).as<t_bool>()
         t = t_dtype::DTYPE_TIME;
     } else if (jstype == "string") {
         t_str lower = x.call<val>("toLowerCase").as<t_str>();
