@@ -155,13 +155,21 @@ export class DataParser {
         if (format === this.data_formats.row) {
             while (inferredType === undefined && i < 100 && i < data.length) {
                 if (data[i].hasOwnProperty(name)) {
-                    inferredType = this.infer_type(__MODULE__, data[i][name]);
+                    if (data[i][name] !== null) {
+                        inferredType = __MODULE__.infer_type(data[i][name], is_valid_date);
+                    } else {
+                        inferredType = null;
+                    }
                 }
                 i++;
             }
         } else if (format === this.data_formats.column) {
             while (inferredType === undefined && i < 100 && i < data[name].length) {
-                inferredType = this.infer_type(__MODULE__, data[name][i]);
+                if (data[name][i] !== null) {
+                    inferredType = __MODULE__.infer_type(data[name][i], is_valid_date);
+                } else {
+                    inferredType = null;
+                }
                 i++;
             }
         }
